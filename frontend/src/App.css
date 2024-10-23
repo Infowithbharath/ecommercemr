@@ -192,22 +192,6 @@
 
 
 
-.product-type-image {
-  width: 160px; /* Large, luxurious image */
-  height: 240px;
-  object-fit: cover;
-  margin-bottom: 10px;
-  border-radius: 12px;
-}
-
-
-
-.product-type-card p {
-  font-size: 18px;
-  color: #333;
-  font-weight: 600;
-  margin-top: -8px;
-}
 
 /* Ensure slider is responsive */
 @media (max-width: 768px) {

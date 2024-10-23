@@ -40,24 +40,19 @@ const ProductTypeSlider = ({ onProductTypeSelect }) => {
 		}
 	}, [selectedSubcategory, productTypes]);
 
-	const scrollLeft = () => {
-		if (sliderRef.current) {
-			sliderRef.current.scrollBy({ left: -300, behavior: "smooth" });
-		}
-	};
-
-	const scrollRight = () => {
-		if (sliderRef.current) {
-			sliderRef.current.scrollBy({ left: 300, behavior: "smooth" });
-		}
-	};
-
 	return (
 		<div className="product-type-slider-container">
 			<h2 className="slider-heading">Browse by Category</h2>
 
 			<div className="slider-wrapper">
-				<button className="slider-arrow left-arrow" onClick={scrollLeft}>
+				<button
+					className="slider-arrow left-arrow"
+					onClick={() =>
+						sliderRef.current.scrollBy({
+							left: -sliderRef.current.clientWidth * 0.5,
+							behavior: "smooth",
+						})
+					}>
 					&#9664;
 				</button>
 
@@ -78,25 +73,31 @@ const ProductTypeSlider = ({ onProductTypeSelect }) => {
 						</div>
 					</div>
 
-					{filteredProductTypes &&
-						filteredProductTypes.map((productType) => (
-							<div
-								className="product-type-card"
-								key={productType._id}
-								onClick={() => onProductTypeSelect(productType._id)}>
-								<div className="card-content">
-									<img
-										src={`${apiUrl}/${productType.image}`}
-										alt={productType.name}
-										className="product-type-image"
-									/>
-									<p>{productType.name}</p>
-								</div>
+					{filteredProductTypes.map((productType) => (
+						<div
+							className="product-type-card"
+							key={productType._id}
+							onClick={() => onProductTypeSelect(productType._id)}>
+							<div className="card-content">
+								<img
+									src={`${apiUrl}/${productType.image}`}
+									alt={productType.name}
+									className="product-type-image"
+								/>
+								<p>{productType.name}</p>
 							</div>
-						))}
+						</div>
+					))}
 				</div>
 
-				<button className="slider-arrow right-arrow" onClick={scrollRight}>
+				<button
+					className="slider-arrow right-arrow"
+					onClick={() =>
+						sliderRef.current.scrollBy({
+							left: sliderRef.current.clientWidth * 0.5,
+							behavior: "smooth",
+						})
+					}>
 					&#9654;
 				</button>
 			</div>

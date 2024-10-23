@@ -10,22 +10,24 @@ const SubcategoryForm = ({ subcategory, onSubmit, onCancel }) => {
 	const [categories, setCategories] = useState([]);
 	const [loading, setLoading] = useState(false);
 
+	// Determine if the form is in edit mode
 	const isEditMode = !!subcategory;
 
 	useEffect(() => {
+		// Fetch categories on component mount
 		fetchCategories();
+
+		// Populate form fields if editing an existing subcategory
 		if (subcategory) {
 			setName(subcategory.name);
 			setCategory(subcategory.category._id || subcategory.category);
 			setCurrentImage(subcategory.image);
-			setImage(null); // Clear image selection
 		} else {
-			setName("");
-			setCategory("");
-			setCurrentImage("");
+			resetForm();
 		}
 	}, [subcategory]);
 
+	// Function to fetch categories from the API
 	const fetchCategories = async () => {
 		try {
 			const res = await api.get("/categories");
@@ -35,27 +37,43 @@ const SubcategoryForm = ({ subcategory, onSubmit, onCancel }) => {
 		}
 	};
 
+	// Handle image selection
 	const handleImageChange = (e) => {
 		setImage(e.target.files[0]);
 	};
 
+	// Reset form fields
+	const resetForm = () => {
+		setName("");
+		setCategory("");
+		setCurrentImage("");
+		setImage(null);
+	};
+
+	// Handle form submission
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		// Validate fields
 		if (!name || !category) {
 			alert("Please fill out all required fields.");
 			return;
 		}
 
 		setLoading(true);
+
 		const formData = new FormData();
 		formData.append("name", name);
 		formData.append("category", category);
-		if (image) formData.append("image", image);
+		if (image) {
+			formData.append("image", image);
+		}
 
 		try {
+			let response;
 			if (isEditMode) {
-				const response = await api.put(
+				// Update existing subcategory
+				response = await api.put(
 					`/subcategories/${subcategory._id}`,
 					formData,
 					{
@@ -63,18 +81,19 @@ const SubcategoryForm = ({ subcategory, onSubmit, onCancel }) => {
 					}
 				);
 				alert("Subcategory updated successfully");
-				onSubmit(response.data);
 			} else {
-				const response = await api.post("/subcategories", formData, {
+				// Create new subcategory
+				response = await api.post("/subcategories", formData, {
 					headers: { "Content-Type": "multipart/form-data" },
 				});
 				alert("Subcategory created successfully");
-				onSubmit(response.data);
 			}
-			setLoading(false);
+			onSubmit(response.data);
+			resetForm();
 		} catch (err) {
 			console.error("Error submitting subcategory:", err);
 			alert("Failed to submit the subcategory.");
+		} finally {
 			setLoading(false);
 		}
 	};

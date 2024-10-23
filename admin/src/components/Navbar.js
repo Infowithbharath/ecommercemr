@@ -17,13 +17,13 @@ const Navbar = () => {
 					</Link>
 				</li>
 				<li>
-					<Link to="/products">
-						<FaBoxOpen className="icon" /> Products
+					<Link to="/product-types">
+						<FaShapes className="icon" /> Product Types
 					</Link>
 				</li>
 				<li>
-					<Link to="/product-types">
-						<FaShapes className="icon" /> Product Types
+					<Link to="/products">
+						<FaBoxOpen className="icon" /> Products
 					</Link>
 				</li>
 			</ul>

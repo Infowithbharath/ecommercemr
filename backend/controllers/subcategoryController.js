@@ -6,6 +6,10 @@ exports.createSubcategory = async (req, res) => {
 		const { name, category } = req.body;
 		const image = req.file ? req.file.path : null;
 
+		console.log("Name:", name);
+		console.log("Category:", category);
+		console.log("Image path:", image);
+
 		if (!name || !category || !image) {
 			return res
 				.status(400)
@@ -34,7 +38,7 @@ exports.getSubcategories = async (req, res) => {
 
 exports.getAllSubcategories = async (req, res) => {
 	try {
-		const subcategories = await Subcategory.find(); // Fetch all subcategories
+		const subcategories = await Subcategory.find();
 		res.json(subcategories);
 	} catch (error) {
 		res.status(500).json({ error: error.message });
@@ -53,11 +57,10 @@ exports.updateSubcategory = async (req, res) => {
 			return res.status(404).json({ error: "Subcategory not found" });
 		}
 
-		// Update fields
 		subcategory.name = name || subcategory.name;
 		subcategory.category = category || subcategory.category;
 		if (image) {
-			subcategory.image = image; // Update image if a new one is uploaded
+			subcategory.image = image;
 		}
 
 		await subcategory.save();
@@ -68,7 +71,7 @@ exports.updateSubcategory = async (req, res) => {
 };
 
 // Delete Subcategory
-const deleteSubcategory = async (req, res) => {
+exports.deleteSubcategory = async (req, res) => {
 	try {
 		const { id } = req.params;
 		const deletedSubcategory = await Subcategory.findByIdAndDelete(id);
@@ -82,6 +85,3 @@ const deleteSubcategory = async (req, res) => {
 		res.status(500).json({ message: "Server error" });
 	}
 };
-
-// Export the deleteSubcategory function
-exports.deleteSubcategory = deleteSubcategory;
