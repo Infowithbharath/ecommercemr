@@ -1,0 +1,131 @@
+/* Container for the product card */
+.card {
+  flex: 0 1 calc(20% - 32px);
+  margin: 16px;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Hover effects */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for the product image */
+.image {
+  width: 220px;
+  height: 280px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Details section for product name, price, and discount */
+.details {
+  padding: 16px 0;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Name styling with ellipsis to prevent overflow */
+.name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Price and discount styling */
+.price {
+  font-size: 18px;
+  font-weight: bolder;
+  color: #e74c3c;
+  margin: 5px 0;
+}
+
+.originalPrice {
+  text-decoration: line-through;
+  color: #777;
+  margin-left: 8px;
+  font-size: 16px;
+}
+
+.discount {
+  font-size: 16px;
+  font-weight: 1000;
+  color: #e51d9c;
+  margin-bottom: 8px;
+}
+
+/* Button is fixed at the bottom of the card */
+.button {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #e51d9c;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Button hover effect */
+.button:hover {
+  background-color: #e51d9c;
+  transform: translateY(-2px);
+}
+
+/* Responsive layout adjustments */
+@media (max-width: 1024px) {
+  .card {
+    flex: 0 1 calc(33% - 32px);
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 0 1 calc(50% - 32px);
+  }
+
+  .image {
+    width: 180px;
+    height: 240px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    flex: 0 1 100%;
+  }
+
+  .image {
+    width: 160px;
+    height: 220px;
+  }
+}

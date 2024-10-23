@@ -1,0 +1,35 @@
+.mrp-price {
+  text-decoration: line-through;
+  font-size: 18px;
+  color: black;
+  margin-right: 10px;
+  animation: strikeout 0.5s forwards;
+}
+
+.discounted-price {
+  font-size: 22px;
+  color: #e74c3c;
+  font-weight: bold;
+  opacity: 0; /* Start as invisible */
+  animation: fadeIn 0.5s forwards 0.5s; /* Delay for fade in effect */
+}
+
+@keyframes strikeout {
+  from {
+    text-decoration: none;
+    transform: scale(1);
+  }
+  to {
+    text-decoration: line-through;
+    transform: scale(1.1); /* Slightly increase size during strikeout */
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

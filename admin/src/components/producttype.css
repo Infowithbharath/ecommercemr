@@ -1,0 +1,153 @@
+/* Luxurious color palette */
+:root {
+  --primary-color: #1f1f1f;
+  --secondary-color: #3a3a3a;
+  --accent-color: #d4af37; /* Gold accent */
+  --text-color: #ffffff;
+  --light-color: #f5f5f5;
+}
+
+/* Body Styling */
+body {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* General Button Styling */
+button {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #b58900;
+}
+
+button.delete-button {
+  background-color: #ff4d4d; /* Red for delete button */
+}
+
+button.delete-button:hover {
+  background-color: #d42b2b; /* Darker red on hover */
+}
+
+/* Product Types List Styling */
+.product-types-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  background-color: var(--secondary-color);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
+.product-types-container h1 {
+  text-align: center;
+  font-size: 36px;
+  color: var(--accent-color);
+  margin-bottom: 40px;
+}
+
+.product-types-list {
+  list-style: none;
+  padding: 0;
+}
+
+.product-types-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #555;
+  margin-bottom: 15px;
+}
+
+.product-types-list h3 {
+  font-size: 24px;
+  margin: 0;
+  color: var(--light-color);
+}
+
+.product-types-list img {
+  border-radius: 10px;
+  border: 2px solid var(--accent-color);
+  width: 200px;
+}
+
+/* Form Styling */
+.product-type-form {
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: var(--secondary-color);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+}
+
+.product-type-form label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--light-color);
+}
+
+.product-type-form input[type='text'],
+.product-type-form select {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: var(--light-color);
+}
+
+.product-type-form input[type='file'] {
+  display: block;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 5px;
+}
+
+.product-type-form button {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .product-types-container h1 {
+    font-size: 28px;
+  }
+
+  .product-types-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-types-list img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+  }
+
+  .product-type-form button {
+    font-size: 16px;
+  }
+}

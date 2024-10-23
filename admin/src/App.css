@@ -1,0 +1,49 @@
+.app-container {
+  display: flex;
+}
+
+.navbar {
+  width: 220px;
+  background-color: #1a1a2e; /* New background color */
+  padding: 20px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar li {
+  margin: 15px 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.navbar a:hover {
+  background-color: #444;
+  color: #fff;
+}
+
+.navbar a .icon {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #2d2727;
+  color: #fff;
+}

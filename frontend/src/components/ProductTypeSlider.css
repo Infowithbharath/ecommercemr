@@ -1,0 +1,74 @@
+.product-type-slider-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.slider-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 20px;
+}
+
+.product-type-slider {
+  display: flex;
+  gap: 20px; /* Space between items */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-left: 40px; /* Ensures the first item is visible */
+  white-space: nowrap;
+  box-sizing: border-box;
+
+}
+
+.product-type-card {
+  min-width: 200px;
+  flex: 0 0 auto;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.product-type-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.slider-arrow {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  padding: 10px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 10px;
+}
+
+.product-type-slider::-webkit-scrollbar {
+  display: none; /* Hide scrollbar */
+}
+
+.product-type-card:first-child {
+  margin-left: 450px; /* Adjust this value to ensure full visibility */
+}

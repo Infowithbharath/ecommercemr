@@ -1,0 +1,294 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif; /* Updated font for a modern look */
+}
+
+/* App Container */
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.header .logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+.header .search-bar {
+  display: flex;
+  align-items: center;
+  width: 60%;
+}
+
+.search-bar input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  font-size: 16px;
+}
+
+.search-bar button {
+  padding: 10px;
+  border: 2px solid #ddd;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+  background-color: #555;
+}
+
+.header .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-links .cart-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Banner Styles */
+.banner {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.3)), url('./components/world-saree-day-copy-space-background_548646-56572.avif') center center/cover no-repeat;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.banner-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+}
+
+.banner-title {
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
+.banner-subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.banner-button {
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #812A6E;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(255, 153, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.banner-button:hover {
+  background-color: #e68a00;
+  transform: scale(1.05);
+}
+
+/* Add media query for mobile responsiveness */
+@media (max-width: 768px) {
+  .banner {
+    height: 300px;
+  }
+
+  .banner-title {
+    font-size: 2rem;
+  }
+
+  .banner-subtitle {
+    font-size: 1rem;
+  }
+
+  .banner-button {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+
+/* Product Type Slider */
+/* Product Type Slider */
+.product-type-slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px; /* Increased gap for spacing */
+  padding: 40px 20px; /* Luxurious padding */
+  background-color: #e9e4e4; /* Light background to contrast the banner */
+  border-radius: 10px; /* Smooth rounded edges */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.product-type-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px; /* Larger card size */
+  height: 300px;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid #eae4e4;
+  border-radius: 15px; /* More rounded corners */
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.product-type-image {
+  width: 160px; /* Large, luxurious image */
+  height: 240px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border-radius: 12px;
+}
+
+
+
+.product-type-card p {
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+  margin-top: -8px;
+}
+
+/* Ensure slider is responsive */
+@media (max-width: 768px) {
+  .product-type-slider {
+    gap: 15px; /* Reduced gap for smaller screens */
+    padding: 20px;
+    flex-wrap: wrap; /* Stack the cards on smaller screens */
+  }
+
+  .product-type-card {
+    width: 120px; /* Smaller size for mobile */
+  }
+
+  .product-type-image {
+    width: 80px;
+    height: 120px;
+  }
+}
+
+
+/* Products Section */
+.products-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.product-card {
+  width: calc(25% - 20px);
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  transition: all 0.3s;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added box-shadow */
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  border-color: #333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Hover shadow effect */
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 10px;
+}
+
+.product-info h4 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.product-info p {
+  font-size: 14px;
+  color: #666;
+}
+
+.product-info .price {
+  font-weight: bold;
+  color: #d9534f;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  border-top: 2px solid #e0e0e0;
+}
+
+.footer p {
+  color: #333;
+  font-size: 14px;
+}
+

@@ -1,0 +1,65 @@
+/* ProductList.css */
+
+.categories-list {
+  max-width: 1200px;
+  margin: 50px auto;
+  background-color: var(--secondary-color);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
+.categories-list h1 {
+  text-align: center;
+  font-size: 36px;
+  color: var(--accent-color);
+  margin-bottom: 40px;
+}
+
+.categories-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.categories-list th, .categories-list td {
+  padding: 15px;
+  text-align: left;
+}
+
+.categories-list tr:nth-child(even) {
+  background-color: var(--secondary-color);
+}
+
+.categories-list button {
+  margin: 0 5px;
+}
+
+/* ProductForm.css */
+
+.category-form {
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: var(--secondary-color);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+}
+
+.category-form input[type="text"],
+.category-form input[type="file"] {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: var(--light-color);
+}
+
+.category-form button {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}

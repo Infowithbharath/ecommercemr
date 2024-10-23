@@ -1,0 +1,197 @@
+/* General Navbar Styles */
+.navbar {
+  background: white; /* Gradient inspired by logo */
+  padding: 15px 50px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo Image Styling */
+.navbar-logo-image {
+  height: 80px; /* Adjust for your preferred size */
+  object-fit: contain; /* Keeps logo proportionate */
+}
+
+/* Search Bar Styling */
+.navbar-center {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1); /* Slight transparency for elegance */
+  border-radius: 20px;
+  padding: 5px 15px;
+  width: 35%;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-search {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 230px; /* Adjust as needed */
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  color: #000000;
+  padding: 10px 50px;
+  font-size: 16px;
+  width: 100%;
+  outline: none;
+  caret-color: #000000;
+  border: 2px solid #000000;
+  border-radius: 20px;
+}
+
+.search-button {
+  background-color: #e51d9c; 
+  border: none;
+  padding: 8px 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #e51d9c; 
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  margin-left: 20px;
+  padding: 8px 15px;
+  border-radius: 20px;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
+  color: #e51d9c; /* Gold text on hover */
+}
+
+.cart-button {
+  background-color: transparent;
+  border: 2px solid #e51d9c; /* Gold border for luxury */
+  background-color: #e51d9c;
+}
+
+.contact-button {
+  background-color: transparent;
+  border: 2px solid white;
+  background-color: #e51d9c ; /* White border for elegance */
+}
+
+.nav-link:hover {
+  border-color: #e51d9c;
+}
+
+/* Button Icon Margins */
+.nav-link svg {
+  margin-right: 8px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+  }
+
+  .navbar-center {
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .navbar-right {
+    margin-top: 10px;
+  }
+}
+
+.menu-icon {
+  cursor: pointer;
+  font-size: 24px;
+  margin-right: 20px;
+}
+.category-menu {
+  position: absolute;
+  top: 60px; /* Position below the navbar */
+  left: 0;
+  width: 200px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.category-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.category-menu li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.category-menu li:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.search-results {
+  margin-top: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.search-result-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.search-results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.search-results ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.search-results ul li p {
+  margin-left: 10px;
+}
+
+/* Add this CSS to your Navbar.css file */
+
+.collection-text {
+  flex: 1; /* Allows the text to occupy the available space */
+  text-align: center; /* Center the text */
+  font-size: 30px; /* Adjust font size as needed */
+  font-weight: bold; /* Make the text bold */
+  color: #333; /* Change color as needed */
+  margin-left: 150px;
+  color: #e51d9c;
+
+}
+
