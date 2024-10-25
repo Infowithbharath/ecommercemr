@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "../services/api";
 import SubcategoryForm from "./SubcategoryForm";
-import "./subcategories.css"; // Use the new CSS for subcategories
-
-const apiUrl = process.env.REACT_APP_BASE_URL;
+import "./subcategories.css";
 
 const SubcategoriesList = () => {
 	const [subcategories, setSubcategories] = useState([]);
@@ -33,19 +31,13 @@ const SubcategoriesList = () => {
 	const handleDelete = async (subcategoryId) => {
 		if (window.confirm("Are you sure you want to delete this subcategory?")) {
 			try {
-				const response = await api.delete(
-					`${apiUrl}/subcategories/${subcategoryId}`
-				);
-				console.log(response.data); // Log the response for debugging
+				await api.delete(`/subcategories/${subcategoryId}`);
 				setSubcategories(
 					subcategories.filter((sub) => sub._id !== subcategoryId)
 				);
 				alert("Subcategory deleted successfully");
 			} catch (error) {
-				console.error(
-					"Error deleting subcategory:",
-					error.response || error.message
-				);
+				console.error("Error deleting subcategory:", error);
 				alert("Failed to delete the subcategory.");
 			}
 		}
@@ -54,14 +46,14 @@ const SubcategoriesList = () => {
 	const handleFormSubmit = (updatedSubcategory) => {
 		if (selectedSubcategory) {
 			// Update the subcategory in the list
-			setSubcategories(
-				subcategories.map((sub) =>
+			setSubcategories((prev) =>
+				prev.map((sub) =>
 					sub._id === updatedSubcategory._id ? updatedSubcategory : sub
 				)
 			);
 		} else {
 			// Add new subcategory to the list
-			setSubcategories([...subcategories, updatedSubcategory]);
+			setSubcategories((prev) => [...prev, updatedSubcategory]);
 		}
 		setSelectedSubcategory(null); // Reset form after submit
 	};
@@ -84,7 +76,7 @@ const SubcategoriesList = () => {
 						<h3>{sub.name}</h3>
 						{sub.image && (
 							<img
-								src={`${apiUrl}/${sub.image}`}
+								src={`${process.env.REACT_APP_BASE_URL}/${sub.image}`}
 								alt={sub.name}
 								className="subcategory-image"
 							/>
