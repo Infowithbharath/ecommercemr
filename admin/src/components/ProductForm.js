@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "../services/api"; // Import your API file
 
-const ProductForm = () => {
+const ProductForm = ({ productToEdit, onUpdate }) => {
 	const [name, setName] = useState("");
 	const [category, setCategory] = useState("");
 	const [subcategory, setSubcategory] = useState("");
@@ -12,7 +12,7 @@ const ProductForm = () => {
 	const [description, setDescription] = useState("");
 	const [quantity, setQuantity] = useState("");
 	const [colors, setColors] = useState([]);
-	const [images, setImages] = useState(null); // Updated to handle files
+	const [images, setImages] = useState(null);
 	const [categories, setCategories] = useState([]);
 	const [subcategories, setSubcategories] = useState([]);
 	const [productTypes, setProductTypes] = useState([]);
@@ -20,6 +20,21 @@ const ProductForm = () => {
 	useEffect(() => {
 		fetchCategories();
 	}, []);
+
+	useEffect(() => {
+		if (productToEdit) {
+			setName(productToEdit.name || "");
+			setCategory(productToEdit.category || "");
+			setSubcategory(productToEdit.subcategory || "");
+			setProductType(productToEdit.productType || "");
+			setMrpPrice(productToEdit.mrpPrice || "");
+			setDiscount(productToEdit.discount || "");
+			setDiscountedPrice(productToEdit.discountedPrice || "");
+			setDescription(productToEdit.description || "");
+			setQuantity(productToEdit.quantity || "");
+			setColors(productToEdit.colors || []);
+		}
+	}, [productToEdit]);
 
 	const fetchCategories = async () => {
 		try {
@@ -68,9 +83,8 @@ const ProductForm = () => {
 		formData.append("discount", discount);
 		formData.append("description", description);
 		formData.append("quantity", quantity);
-		formData.append("colors", colors.join(",")); // ensure it's a string
+		formData.append("colors", colors.join(","));
 
-		// Append images
 		if (images) {
 			for (let i = 0; i < images.length; i++) {
 				formData.append("images", images[i]);
@@ -78,12 +92,24 @@ const ProductForm = () => {
 		}
 
 		try {
-			console.log([...formData]); // log the form data
-			await api.post("/product", formData, {
-				headers: {
-					"Content-Type": "multipart/form-data",
-				},
-			});
+			if (productToEdit) {
+				// Editing an existing product
+				await api.put(`/product/${productToEdit._id}`, formData, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				});
+				alert("Product updated successfully!");
+				onUpdate();
+			} else {
+				// Creating a new product
+				await api.post("/product", formData, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				});
+				alert("Product created successfully!");
+			}
 		} catch (err) {
 			console.error(
 				"Error submitting product:",
@@ -94,9 +120,9 @@ const ProductForm = () => {
 
 	return (
 		<div>
-			<h2>Product Form</h2>
+			<h2>{productToEdit ? "Edit Product" : "Add Product"}</h2>
 			<form onSubmit={handleSubmit}>
-				<select onChange={handleCategoryChange}>
+				<select onChange={handleCategoryChange} value={category}>
 					<option value="">Select Category</option>
 					{categories.map((cat) => (
 						<option key={cat._id} value={cat._id}>
@@ -104,7 +130,7 @@ const ProductForm = () => {
 						</option>
 					))}
 				</select>
-				<select onChange={handleSubcategoryChange}>
+				<select onChange={handleSubcategoryChange} value={subcategory}>
 					<option value="">Select Subcategory</option>
 					{subcategories.map((subcat) => (
 						<option key={subcat._id} value={subcat._id}>
@@ -112,7 +138,9 @@ const ProductForm = () => {
 						</option>
 					))}
 				</select>
-				<select onChange={(e) => setProductType(e.target.value)}>
+				<select
+					onChange={(e) => setProductType(e.target.value)}
+					value={productType}>
 					<option value="">Select Product Type</option>
 					{productTypes.map((prodType) => (
 						<option key={prodType._id} value={prodType._id}>
@@ -165,11 +193,13 @@ const ProductForm = () => {
 				<input
 					type="text"
 					placeholder="Colors (comma separated)"
-					value={colors}
+					value={colors.join(",")}
 					onChange={(e) => setColors(e.target.value.split(","))}
 				/>
 				<input type="file" onChange={handleImageChange} multiple />
-				<button type="submit">Add Product</button>
+				<button type="submit">
+					{productToEdit ? "Update Product" : "Add Product"}
+				</button>
 			</form>
 		</div>
 	);

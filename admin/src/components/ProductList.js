@@ -27,11 +27,18 @@ const ProductList = () => {
 	const handleDelete = async (id) => {
 		if (window.confirm("Are you sure you want to delete this product?")) {
 			try {
-				await api.delete(`/product/${id}`);
-				alert("Product deleted successfully!");
-				fetchProducts();
+				const res = await api.delete(`/product/${id}`);
+				if (res.status === 200) {
+					alert("Product deleted successfully!");
+					fetchProducts(); // Refresh the product list
+				} else {
+					console.error("Failed to delete the product");
+				}
 			} catch (err) {
-				console.error("Error deleting product:", err);
+				console.error(
+					"Error deleting product:",
+					err.response ? err.response.data : err.message
+				);
 			}
 		}
 	};
