@@ -102,13 +102,13 @@
 .banner {
   position: relative;
   width: 100%;
-  height: 500px; /* Default height for larger screens */
+  height: 400px; /* Default height for larger screens */
   border-radius: 20px;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  margin: 0;
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.3)), 
               url('./components/world-saree-day-copy-space-background_548646-56572.avif') center center/cover no-repeat;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
@@ -124,7 +124,7 @@
 
 @media (max-width: 480px) {
   .banner {
-    height: 300px; /* Further reduce height for mobile */
+    height: 250px; /* Further reduce height for mobile */
     background-position: top; /* Change position to top to focus on important content */
   }
 }
@@ -159,12 +159,12 @@
 }
 
 .product-type-card {
-  width: 250px;
+  width: 300px;
   height: 400px;
   flex: 0 0 auto;
   text-align: center;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin: 20px;
   transition: transform 0.2s;
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -183,6 +183,46 @@
   object-fit: cover;
   border-radius: 10px;
 }
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .product-type-slider {
+        gap: 10px; /* Reduce gap between items on mobile */
+        padding: 5px; /* Adjusted padding for mobile */
+    }
+
+    .product-type-card {
+        min-width: 120px; /* Reduce card width for smaller screens */
+        padding: 8px; /* Adjust padding for mobile */
+    }
+
+    .slider-heading {
+        font-size: 1.3rem; /* Smaller heading size for mobile */
+    }
+
+    .slider-arrow {
+        font-size: 1.5rem; /* Smaller arrow size for mobile */
+        padding: 5px; /* Smaller padding for mobile */
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .product-type-slider {
+        gap: 15px; /* Adjust gap between items for tablets */
+        padding: 10px; /* Adjusted padding for tablets */
+    }
+
+    .product-type-card {
+        min-width: 140px; /* Slightly larger cards for tablets */
+        padding: 10px; /* Adjust padding for tablets */
+    }
+
+    .slider-arrow {
+        font-size: 1.8rem; /* Slightly smaller arrow size for tablets */
+        padding: 8px; /* Adjust padding for tablets */
+    }
+}
+
 
 /* Products Section */
 .products-section {

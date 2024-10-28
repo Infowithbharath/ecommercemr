@@ -8,6 +8,7 @@
 .slider-heading {
     text-align: center;
     margin-bottom: 20px;
+    font-size: 1.5rem; /* Responsive heading size */
 }
 
 .slider-wrapper {
@@ -28,7 +29,7 @@
 
 /* Ensure proper centering for all cards */
 .product-type-card {
-    min-width: 200px; /* Ensure the card has a minimum width */
+    min-width: 100px; /* Ensure the card has a minimum width */
     flex: 0 0 auto; /* Prevent card shrinking */
     text-align: center;
     cursor: pointer;
@@ -45,8 +46,7 @@
     transform: scale(1.05); /* Scale up the card slightly on hover */
 }
 
-
-
+/* Arrows for navigation */
 .slider-arrow {
     background-color: rgba(255, 255, 255, 0.8);
     border: none;
@@ -69,13 +69,54 @@
     right: 10px; /* Adjust right arrow position */
 }
 
+/* Hide default scrollbar */
 .product-type-slider::-webkit-scrollbar {
-    display: none; /* Hide scrollbar */
+    display: none;
 }
 
+/* Card content styles */
 .product-type-card p {
     font-size: 18px;
     color: #333;
     font-weight: 600;
     margin-top: 8px; /* Adjusted margin for better spacing */
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .product-type-slider {
+        gap: 10px; /* Reduce gap between items on mobile */
+        padding: 5px; /* Adjusted padding for mobile */
+    }
+
+    .product-type-card {
+        min-width: 120px; /* Reduce card width for smaller screens */
+        padding: 8px; /* Adjust padding for mobile */
+    }
+
+    .slider-heading {
+        font-size: 1.3rem; /* Smaller heading size for mobile */
+    }
+
+    .slider-arrow {
+        font-size: 1.5rem; /* Smaller arrow size for mobile */
+        padding: 5px; /* Smaller padding for mobile */
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .product-type-slider {
+        gap: 15px; /* Adjust gap between items for tablets */
+        padding: 10px; /* Adjusted padding for tablets */
+    }
+
+    .product-type-card {
+        min-width: 140px; /* Slightly larger cards for tablets */
+        padding: 10px; /* Adjust padding for tablets */
+    }
+
+    .slider-arrow {
+        font-size: 1.8rem; /* Slightly smaller arrow size for tablets */
+        padding: 8px; /* Adjust padding for tablets */
+    }
 }
