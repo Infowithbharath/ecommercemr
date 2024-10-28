@@ -33,3 +33,19 @@
     opacity: 1;
   }
 }
+
+/* Product Image Styles */
+.product-image {
+  width: 100px; /* Fixed width for mobile */
+  height: 100px; /* Fixed height for mobile */
+  object-fit: cover; /* Maintain aspect ratio and cover the area */
+  border-radius: 10px; /* Optional: rounded corners */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 480px) {
+  .product-image {
+    width: 100px; /* Keep 100x100 size on mobile */
+    height: 100px; /* Keep 100x100 size on mobile */
+  }
+}

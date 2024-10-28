@@ -74,21 +74,21 @@
   transform: scale(1.05);
 }
 
-/* Media queries for responsiveness */
-@media (max-width: 1200px) {
+/* Media Queries for Responsive Design */
+@media (max-width: 1024px) {
   .product-card {
-    width: calc(33.33% - 20px); /* 3 products per row */
+    width: calc(33.33% - 20px); /* 3 products per row at 768px */
   }
 }
 
 @media (max-width: 768px) {
   .product-card {
-    width: calc(50% - 20px); /* 2 products per row */
+    width: calc(50% - 20px); /* 2 products per row at 480px */
   }
 }
 
 @media (max-width: 480px) {
   .product-card {
-    width: 100%; /* 1 product per row on mobile */
+    width: calc(100% - 20px); /* Full width on extra small screens */
   }
 }

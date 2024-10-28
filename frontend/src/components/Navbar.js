@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { FaShoppingCart, FaEnvelope, FaBars } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import logo from "./logo.png";
+import logo from "./[removal.ai]_8bff5fd0-35f6-46d5-a414-e7e5172e39e4-mrijyo_logo1.png";
 import categoryService from "../services/categoryService";
 import subcategoryService from "../services/subcategoryService";
 import { SubcategoryContext } from "../components/SubcategoryContext";

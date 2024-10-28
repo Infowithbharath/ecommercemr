@@ -65,6 +65,7 @@
   background-color: #e51d9c; 
 }
 
+/* Right section of navbar */
 .navbar-right {
   display: flex;
   align-items: center;
@@ -84,51 +85,31 @@
 
 .nav-link:hover {
   background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
-  color: #e51d9c; /* Gold text on hover */
+  color: #e51d9c; /* Color on hover */
 }
 
 .cart-button {
   background-color: transparent;
-  border: 2px solid #e51d9c; /* Gold border for luxury */
+  border: 2px solid #e51d9c; /* Button style */
   background-color: #e51d9c;
 }
 
 .contact-button {
   background-color: transparent;
   border: 2px solid white;
-  background-color: #e51d9c ; /* White border for elegance */
+  background-color: #e51d9c ; /* White border */
 }
 
 .nav-link:hover {
   border-color: #e51d9c;
 }
 
-/* Button Icon Margins */
+/* Icon in the buttons */
 .nav-link svg {
   margin-right: 8px;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .navbar-container {
-    flex-direction: column;
-  }
-
-  .navbar-center {
-    width: 100%;
-    margin-top: 15px;
-  }
-
-  .navbar-right {
-    margin-top: 10px;
-  }
-}
-
-.menu-icon {
-  cursor: pointer;
-  font-size: 24px;
-  margin-right: 20px;
-}
+/* Category Dropdown Menu */
 .category-menu {
   position: absolute;
   top: 60px; /* Position below the navbar */
@@ -154,6 +135,7 @@
   cursor: pointer;
 }
 
+/* Search Results Dropdown */
 .search-results {
   margin-top: 10px;
   background-color: #fff;
@@ -182,16 +164,79 @@
   margin-left: 10px;
 }
 
-/* Add this CSS to your Navbar.css file */
-
+/* Collection Text */
 .collection-text {
-  flex: 1; /* Allows the text to occupy the available space */
-  text-align: center; /* Center the text */
-  font-size: 30px; /* Adjust font size as needed */
-  font-weight: bold; /* Make the text bold */
-  color: #333; /* Change color as needed */
+  flex: 1;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: #e51d9c; /* Logo color for consistency */
   margin-left: 150px;
-  color: #e51d9c;
-
 }
 
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+  }
+
+  .navbar-center {
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .navbar-right {
+    margin-top: 10px;
+  }
+
+  .search-input {
+    width: 80%;
+    padding: 8px 15px;
+  }
+
+  .search-button {
+    padding: 8px 15px;
+  }
+  
+  .navbar-logo-image {
+    height: 60px;
+  }
+
+  .collection-text {
+    font-size: 24px;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-container {
+    padding: 10px;
+  }
+
+  .navbar-center {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .navbar-right {
+    margin-top: 10px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .collection-text {
+    font-size: 20px;
+  }
+  
+  .navbar-logo-image {
+    height: 50px;
+  }
+  
+  .menu-icon {
+    font-size: 20px;
+  }
+}

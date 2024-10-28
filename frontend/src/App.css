@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif; /* Updated font for a modern look */
+  font-family: 'Poppins', sans-serif; /* Modern font */
 }
 
 /* App Container */
@@ -13,8 +13,6 @@
   margin: 0 auto;
   padding: 20px;
 }
-
-
 
 /* Header */
 .header {
@@ -77,140 +75,114 @@
   cursor: pointer;
 }
 
+/* Responsive Header Adjustments */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header .logo {
+    margin-bottom: 10px;
+  }
+
+  .header .search-bar {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .header .nav-links {
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
 /* Banner Styles */
 .banner {
   position: relative;
   width: 100%;
-  height: 500px;
+  height: 500px; /* Default height for larger screens */
   border-radius: 20px;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 20px 0;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.3)), url('./components/world-saree-day-copy-space-background_548646-56572.avif') center center/cover no-repeat;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.3)), 
+              url('./components/world-saree-day-copy-space-background_548646-56572.avif') center center/cover no-repeat;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-.banner-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.3;
-}
-
-.banner-content {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  color: white;
-}
-
-.banner-title {
-  font-size: 3rem;
-  font-weight: 700;
-  font-family: 'Poppins', sans-serif;
-  letter-spacing: 1.5px;
-  margin-bottom: 10px;
-}
-
-.banner-subtitle {
-  font-size: 1.5rem;
-  font-weight: 300;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 30px;
-  opacity: 0.9;
-}
-
-.banner-button {
-  padding: 12px 30px;
-  font-size: 1.2rem;
-  color: #fff;
-  background-color: #812A6E;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(255, 153, 0, 0.3);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.banner-button:hover {
-  background-color: #e68a00;
-  transform: scale(1.05);
-}
-
-/* Add media query for mobile responsiveness */
+/* Mobile Responsiveness for the Banner */
 @media (max-width: 768px) {
   .banner {
-    height: 300px;
+    height: 400px; /* Reduce height for tablet screens */
+    background-position: center; /* Keep background centered */
   }
+}
 
-  .banner-title {
-    font-size: 2rem;
-  }
-
-  .banner-subtitle {
-    font-size: 1rem;
-  }
-
-  .banner-button {
-    font-size: 1rem;
-    padding: 10px 20px;
+@media (max-width: 480px) {
+  .banner {
+    height: 300px; /* Further reduce height for mobile */
+    background-position: top; /* Change position to top to focus on important content */
   }
 }
 
 /* Product Type Slider */
-/* Product Type Slider */
+.product-type-slider-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.slider-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
 .product-type-slider {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px; /* Increased gap for spacing */
-  padding: 40px 20px; /* Luxurious padding */
-  background-color: #e9e4e4; /* Light background to contrast the banner */
-  border-radius: 10px; /* Smooth rounded edges */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  gap: 20px;
+  padding: 10px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  overflow-x: auto;
+  scroll-behavior: smooth;
 }
 
 .product-type-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 180px; /* Larger card size */
-  height: 300px;
-  cursor: pointer;
+  width: 250px;
+  height: 400px;
+  flex: 0 0 auto;
   text-align: center;
-  border: 1px solid #eae4e4;
-  border-radius: 15px; /* More rounded corners */
-  padding: 15px;
-  background-color: white;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: transform 0.2s;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-
-
-/* Ensure slider is responsive */
-@media (max-width: 768px) {
-  .product-type-slider {
-    gap: 15px; /* Reduced gap for smaller screens */
-    padding: 20px;
-    flex-wrap: wrap; /* Stack the cards on smaller screens */
-  }
-
-  .product-type-card {
-    width: 120px; /* Smaller size for mobile */
-  }
-
-  .product-type-image {
-    width: 80px;
-    height: 120px;
-  }
+.product-type-card:hover {
+  transform: scale(1.05);
 }
 
+.product-type-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
 
 /* Products Section */
 .products-section {
@@ -220,21 +192,15 @@
   margin-top: 20px;
 }
 
+/* Adjusting Product Card Width for Different Resolutions */
 .product-card {
-  width: calc(25% - 20px);
   border: 2px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
   background-color: #f9f9f9;
   transition: all 0.3s;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added box-shadow */
-}
-
-.product-card:hover {
-  transform: scale(1.05);
-  border-color: #333;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Hover shadow effect */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .product-card img {
@@ -272,7 +238,34 @@
 }
 
 .footer p {
-  color: #333;
+  color: #666;
   font-size: 14px;
 }
 
+/* Media Query for 1024px Resolution - 4 Product Cards per Row */
+@media (min-width: 1024px) {
+  .product-card {
+    width: calc(25% - 20px); /* Four products per row */
+  }
+}
+
+/* Media Query for 768px Resolution - 3 Product Cards per Row */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .product-card {
+    width: calc(33.33% - 20px); /* Three products per row */
+  }
+}
+
+/* Media Query for 480px Resolution - 2 Product Cards per Row */
+@media (max-width: 767px) {
+  .product-card {
+    width: calc(50% - 20px); /* Two products per row */
+  }
+}
+
+/* Media Query for Small Devices (up to 480px) - 1 Product Card per Row */
+@media (max-width: 480px) {
+  .product-card {
+    width: 100%; /* Full width for each card */
+  }
+}

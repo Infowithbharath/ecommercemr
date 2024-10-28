@@ -45,12 +45,7 @@
     transform: scale(1.05); /* Scale up the card slightly on hover */
 }
 
-.product-type-image {
-    width: 160px; /* Adjusted image width */
-    height: 240px;
-    object-fit: cover;
-    border-radius: 10px; /* Consistent rounding */
-}
+
 
 .slider-arrow {
     background-color: rgba(255, 255, 255, 0.8);
