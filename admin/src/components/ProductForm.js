@@ -41,18 +41,30 @@ const ProductForm = ({ productToEdit, onUpdate }) => {
 			const res = await api.get("/categories");
 			setCategories(res.data);
 		} catch (err) {
-			console.error(err);
+			console.error("Error fetching categories:", err);
 		}
 	};
 
 	const handleCategoryChange = async (e) => {
 		const categoryId = e.target.value;
 		setCategory(categoryId);
+		if (!categoryId) {
+			setSubcategories([]); // Reset subcategories if no category is selected
+			return;
+		}
+
 		try {
 			const res = await api.get(`/subcategories/${categoryId}`);
-			setSubcategories(res.data);
+			console.log("Fetched subcategories:", res.data);
+			if (res.data && Array.isArray(res.data)) {
+				setSubcategories(res.data);
+			} else {
+				console.error("Unexpected response format:", res.data);
+				setSubcategories([]); // Reset if unexpected data format
+			}
 		} catch (err) {
-			console.error(err);
+			console.error("Error fetching subcategories:", err);
+			setSubcategories([]); // Reset in case of an error
 		}
 	};
 
@@ -63,7 +75,7 @@ const ProductForm = ({ productToEdit, onUpdate }) => {
 			const res = await api.get(`/productTypes/${subcategoryId}`);
 			setProductTypes(res.data);
 		} catch (err) {
-			console.error(err);
+			console.error("Error fetching product types:", err);
 		}
 	};
 
