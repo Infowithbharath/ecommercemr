@@ -7,270 +7,272 @@ import cartService from "../services/cartService";
 import "./ProductList.css"; // Import CSS for animations and styles
 
 const ProductList = () => {
-    const [products, setProducts] = useState([]);
-    const [allProducts, setAllProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-    const [selectedProduct, setSelectedProduct] = useState(null);
-    const [selectedImage, setSelectedImage] = useState(""); // For image carousel
-    const [selectedColor, setSelectedColor] = useState("");
-    const [quantity, setQuantity] = useState(1);
-    const [sortOption, setSortOption] = useState("");
-    const [searchTerm, setSearchTerm] = useState(""); // Add state for search input
-    const [zoomedImage, setZoomedImage] = useState(null); // State for zoomed image
+	const [products, setProducts] = useState([]);
+	const [allProducts, setAllProducts] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState("");
+	const [selectedProduct, setSelectedProduct] = useState(null);
+	const [selectedImage, setSelectedImage] = useState(""); // For image carousel
+	const [selectedColor, setSelectedColor] = useState("");
+	const [quantity, setQuantity] = useState(1);
+	const [sortOption, setSortOption] = useState("");
+	const [searchTerm, setSearchTerm] = useState(""); // Add state for search input
+	const [zoomedImage, setZoomedImage] = useState(null); // State for zoomed image
 
-    const { searchQuery } = useParams(); // Get search term from URL params (optional)
-    const apiUrl = process.env.REACT_APP_BASE_URL;
+	const { searchQuery } = useParams(); // Get search term from URL params (optional)
+	const apiUrl = process.env.REACT_APP_BASE_URL;
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            setLoading(true);
-            try {
-                const fetchedProducts = await productService.getProducts();
-                setProducts(fetchedProducts);
-                setAllProducts(fetchedProducts);
+	useEffect(() => {
+		const fetchProducts = async () => {
+			setLoading(true);
+			try {
+				const fetchedProducts = await productService.getProducts();
+				setProducts(fetchedProducts);
+				setAllProducts(fetchedProducts);
 
-                // Filter products if there's a search query
-                if (searchQuery) {
-                    handleSearch(searchQuery);
-                }
-            } catch (err) {
-                console.error(err);
-                setError("Failed to fetch products. Please try again later.");
-            } finally {
-                setLoading(false);
-            }
-        };
+				// Filter products if there's a search query
+				if (searchQuery) {
+					handleSearch(searchQuery);
+				}
+			} catch (err) {
+				console.error(err);
+				setError("Failed to fetch products. Please try again later.");
+			} finally {
+				setLoading(false);
+			}
+		};
 
-        fetchProducts();
-    }, [searchQuery]);
+		fetchProducts();
+	}, [searchQuery]);
 
-    // Handle product type selection
-    const handleProductTypeSelect = (typeId) => {
-        if (typeId === null) {
-            setProducts(allProducts);
-        } else {
-            const filteredProducts = allProducts.filter(
-                (product) => product.productType === typeId
-            );
-            setProducts(filteredProducts);
-        }
-    };
+	// Handle product type selection
+	const handleProductTypeSelect = (typeId) => {
+		if (typeId === null) {
+			setProducts(allProducts);
+		} else {
+			const filteredProducts = allProducts.filter(
+				(product) => product.productType === typeId
+			);
+			setProducts(filteredProducts);
+		}
+	};
 
-    // Handle sorting change
-    const handleSortChange = (e) => {
-        const value = e.target.value;
-        setSortOption(value);
-        let sortedProducts = [...products];
+	// Handle sorting change
+	const handleSortChange = (e) => {
+		const value = e.target.value;
+		setSortOption(value);
+		let sortedProducts = [...products];
 
-        if (value === "low-to-high") {
-            sortedProducts.sort((a, b) => a.discountedPrice - b.discountedPrice);
-        } else if (value === "high-to-low") {
-            sortedProducts.sort((a, b) => b.discountedPrice - a.discountedPrice);
-        } else if (value === "recently-added") {
-            sortedProducts.sort(
-                (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-            );
-        }
+		if (value === "low-to-high") {
+			sortedProducts.sort((a, b) => a.discountedPrice - b.discountedPrice);
+		} else if (value === "high-to-low") {
+			sortedProducts.sort((a, b) => b.discountedPrice - a.discountedPrice);
+		} else if (value === "recently-added") {
+			sortedProducts.sort(
+				(a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+			);
+		}
 
-        setProducts(sortedProducts);
-    };
+		setProducts(sortedProducts);
+	};
 
-    // Handle search functionality
-    const handleSearch = (term) => {
-        setSearchTerm(term); // Update the searchTerm state
-        if (term) {
-            const filteredProducts = allProducts.filter((product) =>
-                product.name.toLowerCase().includes(term.toLowerCase())
-            );
-            setProducts(filteredProducts);
-        } else {
-            setProducts(allProducts); // Reset to all products if search term is empty
-        }
-    };
+	// Handle search functionality
+	const handleSearch = (term) => {
+		setSearchTerm(term); // Update the searchTerm state
+		if (term) {
+			const filteredProducts = allProducts.filter((product) =>
+				product.name.toLowerCase().includes(term.toLowerCase())
+			);
+			setProducts(filteredProducts);
+		} else {
+			setProducts(allProducts); // Reset to all products if search term is empty
+		}
+	};
 
-    const handlePressProduct = (product) => {
-        setSelectedProduct(product);
-        setSelectedImage(product.images[0]); // Default to the first image
-        setSelectedColor(product.colors ? product.colors[0] : "");
-    };
+	const handlePressProduct = (product) => {
+		setSelectedProduct(product);
+		setSelectedImage(product.images[0]); // Default to the first image
+		setSelectedColor(product.colors ? product.colors[0] : "");
+	};
 
-    const handleCloseModal = () => {
-        setSelectedProduct(null);
-        setQuantity(1);
-    };
+	const handleCloseModal = () => {
+		setSelectedProduct(null);
+		setQuantity(1);
+	};
 
-    const handleAddToCart = (product) => {
-        const success = cartService.addToCart({
-            productId: product._id,
-            name: product.name,
-            discountedPrice: product.discountedPrice,
-            quantity,
-            color: selectedColor,
-        });
+	const handleAddToCart = (product) => {
+		const success = cartService.addToCart({
+			productId: product._id,
+			name: product.name,
+			discountedPrice: product.discountedPrice,
+			quantity,
+			color: selectedColor,
+		});
 
-        if (!success) {
-            alert("Failed to add product to cart. Please try again.");
-        } else {
-            alert("Product added to cart successfully!");
-        }
-    };
+		if (!success) {
+			alert("Failed to add product to cart. Please try again.");
+		} else {
+			alert("Product added to cart successfully!");
+		}
+	};
 
-    const handleImageClick = (image) => {
-        setSelectedImage(image);
-        handleZoomImage(image); // Add zoom functionality
-    };
+	const handleImageClick = (image) => {
+		setSelectedImage(image);
+		handleZoomImage(image); // Add zoom functionality
+	};
 
-    const handleZoomImage = (image) => {
-        setZoomedImage(image); // Set zoomed image
-    };
+	const handleZoomImage = (image) => {
+		setZoomedImage(image); // Set zoomed image
+	};
 
-    const handleQuantityChange = (type) => {
-        if (type === "increase") {
-            setQuantity((prev) => prev + 1);
-        } else if (type === "decrease" && quantity > 1) {
-            setQuantity((prev) => prev - 1);
-        }
-    };
+	const handleQuantityChange = (type) => {
+		if (type === "increase") {
+			setQuantity((prev) => prev + 1);
+		} else if (type === "decrease" && quantity > 1) {
+			setQuantity((prev) => prev - 1);
+		}
+	};
 
-    if (loading) {
-        return <div style={styles.loadingSpinner}></div>;
-    }
+	if (loading) {
+		return <div style={styles.loadingSpinner}></div>;
+	}
 
-    if (error) {
-        return <div style={styles.error}>{error}</div>;
-    }
+	if (error) {
+		return <div style={styles.error}>{error}</div>;
+	}
 
-    return (
-        <div style={styles.container}>
-            <ProductTypeSlider onProductTypeSelect={handleProductTypeSelect} />
+	return (
+		<div style={styles.container}>
+			<ProductTypeSlider onProductTypeSelect={handleProductTypeSelect} />
 
-            <h1 style={styles.heading}>Our Exclusive Products</h1>
+			<h1 style={styles.heading}>Our Exclusive Products</h1>
 
-            {/* Search Box */}
-            <div style={styles.searchContainer}>
-                <input
-                    type="text"
-                    placeholder="Search for products..."
-                    value={searchTerm}
-                    onChange={(e) => handleSearch(e.target.value)}
-                    style={styles.searchInput}
-                />
-            </div>
+			{/* Search Box */}
+			<div style={styles.searchContainer}>
+				<input
+					type="text"
+					placeholder="Search for products..."
+					value={searchTerm}
+					onChange={(e) => handleSearch(e.target.value)}
+					style={styles.searchInput}
+				/>
+			</div>
 
-            <div style={styles.sortContainer}>
-                <label style={styles.sortLabel}>Sort By:</label>
-                <select
-                    style={styles.sortSelect}
-                    value={sortOption}
-                    onChange={handleSortChange}>
-                    <option value="">Select</option>
-                    <option value="low-to-high">Price: Low to High</option>
-                    <option value="high-to-low">Price: High to Low</option>
-                </select>
-            </div>
+			<div style={styles.sortContainer}>
+				<label style={styles.sortLabel}>Sort By:</label>
+				<select
+					style={styles.sortSelect}
+					value={sortOption}
+					onChange={handleSortChange}>
+					<option value="">Select</option>
+					<option value="low-to-high">Price: Low to High</option>
+					<option value="high-to-low">Price: High to Low</option>
+				</select>
+			</div>
 
-            <div style={styles.grid}>
-                {products.length > 0 ? (
-                    products.map((product) => (
-                        <ProductCard
-                            key={product._id}
-                            product={product}
-                            onPress={handlePressProduct}
-                        />
-                    ))
-                ) : (
-                    <div>No products found matching your search.</div>
-                )}
-            </div>
+			<div style={styles.grid}>
+				{products.length > 0 ? (
+					products.map((product) => (
+						<ProductCard
+							key={product._id}
+							product={product}
+							onPress={handlePressProduct}
+						/>
+					))
+				) : (
+					<div>No products found matching your search.</div>
+				)}
+			</div>
 
-            {selectedProduct && (
-                <div style={styles.modalOverlay}>
-                    <div style={styles.modal}>
-                        <button style={styles.closeButton} onClick={handleCloseModal}>
-                            &times;
-                        </button>
-                        <div style={styles.modalLeft}>
-                            <img
-                                src={`${apiUrl}/${selectedImage}`}
-                                alt={selectedProduct.name}
-                                style={styles.modalImage}
-                            />
-                            <div style={styles.thumbnailContainer}>
-                                {selectedProduct.images.map((image, index) => (
-                                    <img
-                                        key={index}
-                                        src={`${apiUrl}/${image}`}
-                                        alt={`Thumbnail ${index}`}
-                                        style={styles.thumbnail}
-                                        onClick={() => handleImageClick(image)}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                        <div style={styles.modalRight}>
-                            <h2 style={styles.modalTitle}>{selectedProduct.name}</h2>
-                            <p style={styles.modalDescription}>
-                                {selectedProduct.description}
-                            </p>
-                            <div style={styles.priceContainer}>
-                                <span style={styles.discountedPrice}>
-                                    ${selectedProduct.discountedPrice}
-                                </span>
-                                {selectedProduct.originalPrice && (
-                                    <span style={styles.originalPrice}>
-                                        ${selectedProduct.originalPrice}
-                                    </span>
-                                )}
-                            </div>
-                            <div style={styles.colorContainer}>
-                                <label style={styles.colorLabel}>Select Color:</label>
-                                <select
-                                    value={selectedColor}
-                                    onChange={(e) => setSelectedColor(e.target.value)}
-                                    style={styles.colorSelect}>
-                                    {selectedProduct.colors?.map((color, index) => (
-                                        <option key={index} value={color}>
-                                            {color}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div style={styles.quantityContainer}>
-                                <button
-                                    onClick={() => handleQuantityChange("decrease")}
-                                    disabled={quantity <= 1}
-                                    style={styles.quantityButton}>
-                                    -
-                                </button>
-                                <span style={styles.quantity}>{quantity}</span>
-                                <button
-                                    onClick={() => handleQuantityChange("increase")}
-                                    style={styles.quantityButton}>
-                                    +
-                                </button>
-                            </div>
-                            <button
-                                onClick={() => handleAddToCart(selectedProduct)}
-                                style={styles.addToCartButton}>
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+			{selectedProduct && (
+				<div style={styles.modalOverlay}>
+					<div style={styles.modal}>
+						<button style={styles.closeButton} onClick={handleCloseModal}>
+							&times;
+						</button>
+						<div style={styles.modalLeft}>
+							<img
+								src={`${apiUrl}/${selectedImage}`}
+								alt={selectedProduct.name}
+								style={styles.modalImage}
+							/>
+							<div style={styles.thumbnailContainer}>
+								{selectedProduct.images.map((image, index) => (
+									<img
+										key={index}
+										src={`${apiUrl}/${image}`}
+										alt={`Thumbnail ${index}`}
+										style={styles.thumbnail}
+										onClick={() => handleImageClick(image)}
+									/>
+								))}
+							</div>
+						</div>
+						<div style={styles.modalRight}>
+							<h2 style={styles.modalTitle}>{selectedProduct.name}</h2>
+							<p style={styles.modalDescription}>
+								{selectedProduct.description}
+							</p>
+							<div style={styles.priceContainer}>
+								<span style={styles.discountedPrice}>
+									₹{selectedProduct.discountedPrice}
+								</span>
+								{selectedProduct.originalPrice && (
+									<span style={styles.originalPrice}>
+										₹{selectedProduct.originalPrice}
+									</span>
+								)}
+							</div>
+							<div style={styles.colorContainer}>
+								<label style={styles.colorLabel}>Select Color:</label>
+								<select
+									value={selectedColor}
+									onChange={(e) => setSelectedColor(e.target.value)}
+									style={styles.colorSelect}>
+									{selectedProduct.colors?.map((color, index) => (
+										<option key={index} value={color}>
+											{color}
+										</option>
+									))}
+								</select>
+							</div>
+							<div style={styles.quantityContainer}>
+								<button
+									onClick={() => handleQuantityChange("decrease")}
+									disabled={quantity <= 1}
+									style={styles.quantityButton}>
+									-
+								</button>
+								<span style={styles.quantity}>{quantity}</span>
+								<button
+									onClick={() => handleQuantityChange("increase")}
+									style={styles.quantityButton}>
+									+
+								</button>
+							</div>
+							<button
+								onClick={() => handleAddToCart(selectedProduct)}
+								style={styles.addToCartButton}>
+								Add to Cart
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
 
-            {zoomedImage && (
-                <div style={styles.zoomModalOverlay} onClick={() => setZoomedImage(null)}>
-                    <img
-                        src={`${apiUrl}/${zoomedImage}`}
-                        alt="Zoomed"
-                        style={styles.zoomedImage}
-                    />
-                </div>
-            )}
-        </div>
-    );
+			{zoomedImage && (
+				<div
+					style={styles.zoomModalOverlay}
+					onClick={() => setZoomedImage(null)}>
+					<img
+						src={`${apiUrl}/${zoomedImage}`}
+						alt="Zoomed"
+						style={styles.zoomedImage}
+					/>
+				</div>
+			)}
+		</div>
+	);
 };
 
 const styles = {
@@ -441,22 +443,22 @@ const styles = {
 		cursor: "pointer",
 	},
 	zoomModalOverlay: {
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: "rgba(0, 0, 0, 0.85)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 1001, // Ensure it's above the main modal
-    },
-    zoomedImage: {
-        maxWidth: "90%",
-        maxHeight: "90%",
-        borderRadius: "10px",
-    },
+		position: "fixed",
+		top: 0,
+		left: 0,
+		right: 0,
+		bottom: 0,
+		backgroundColor: "rgba(0, 0, 0, 0.85)",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		zIndex: 1001, // Ensure it's above the main modal
+	},
+	zoomedImage: {
+		maxWidth: "90%",
+		maxHeight: "90%",
+		borderRadius: "10px",
+	},
 };
 
 export default ProductList;
