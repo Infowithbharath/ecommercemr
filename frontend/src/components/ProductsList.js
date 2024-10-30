@@ -93,6 +93,7 @@ const ProductList = () => {
 		setSelectedProduct(product);
 		setSelectedImage(product.images[0]); // Default to the first image
 		setSelectedColor(product.colors ? product.colors[0] : "");
+		setQuantity(1); // Reset quantity when a new product is selected
 	};
 
 	const handleCloseModal = () => {
@@ -101,6 +102,13 @@ const ProductList = () => {
 	};
 
 	const handleAddToCart = (product) => {
+		if (quantity > product.quantity) {
+			alert(
+				`You can only add up to ${product.quantity} units of this product.`
+			);
+			return;
+		}
+
 		const success = cartService.addToCart({
 			productId: product._id,
 			name: product.name,
@@ -126,7 +134,7 @@ const ProductList = () => {
 	};
 
 	const handleQuantityChange = (type) => {
-		if (type === "increase") {
+		if (type === "increase" && quantity < selectedProduct.quantity) {
 			setQuantity((prev) => prev + 1);
 		} else if (type === "decrease" && quantity > 1) {
 			setQuantity((prev) => prev - 1);
@@ -246,29 +254,18 @@ const ProductList = () => {
 								<span style={styles.quantity}>{quantity}</span>
 								<button
 									onClick={() => handleQuantityChange("increase")}
+									disabled={quantity >= selectedProduct.quantity}
 									style={styles.quantityButton}>
 									+
 								</button>
 							</div>
 							<button
-								onClick={() => handleAddToCart(selectedProduct)}
-								style={styles.addToCartButton}>
+								style={styles.addToCartButton}
+								onClick={() => handleAddToCart(selectedProduct)}>
 								Add to Cart
 							</button>
 						</div>
 					</div>
-				</div>
-			)}
-
-			{zoomedImage && (
-				<div
-					style={styles.zoomModalOverlay}
-					onClick={() => setZoomedImage(null)}>
-					<img
-						src={`${apiUrl}/${zoomedImage}`}
-						alt="Zoomed"
-						style={styles.zoomedImage}
-					/>
 				</div>
 			)}
 		</div>
